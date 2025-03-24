@@ -26,3 +26,27 @@ const userPreferences: User[] = [
     preferences: { email: true, sms: true },
   },
 ];
+
+export default {
+  users: {
+    getOne: (filterBy: Partial<Omit<User, "preferences">>) => {
+      const users = userPreferences.filter((user) => {
+        return Object.entries(filterBy)
+          .filter(([, value]) => !!value)
+          .every(([key, value]) => {
+            return user[key as keyof User] === value;
+          });
+      });
+
+      if (users.length === 0) {
+        return null;
+      }
+
+      if (users.length > 1) {
+        throw new Error("Multiple users found");
+      }
+
+      return users[0];
+    },
+  },
+};
