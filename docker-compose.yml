@@ -1,14 +1,14 @@
-version: '3.8'
-
 services:
-  # <YOUR SERVICES HERE>:
-  #   build: 
-  #     context: ./<YOUR SERVICE DIRECTORY>
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - notification-service
+  user-notifications-manager:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - NODE_ENV=production
+      - NOTIFICATION_SERVICE_URL=http://notification-service:5001
+    depends_on:
+      - notification-service
 
   notification-service:
     image: aryekog/backend-interview-notifications-service:0.0.2
