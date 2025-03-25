@@ -45,7 +45,6 @@ const upsertUser = (user: Partial<User>) => {
   // TODO: test if change in one index will affect others
   if (user.userId) {
     if (idToUsers[user.userId]) {
-      // TODO: what if the user adds an email but that email already exists for another user?
       return Object.assign(idToUsers[user.userId], user);
     }
     throw new Error("Cannot update user with userId that does not exist");

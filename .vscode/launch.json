@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Server",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/index.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ],
+            "env": {
+                "NODE_ENV": "development",
+                "RATE_LIMIT_WINDOW_MS": "1000",
+                "EMAIL_RATE_LIMIT": "1",
+                "SMS_RATE_LIMIT": "1",
+                "NOTIFICATION_SERVICE_URL": "http://localhost:5001"
+            }
+        }
+    ]
+}

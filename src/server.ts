@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "axios";
 import cors from "cors";
 import express from "express";
 import { authenticate } from "./middlewares/authentication";
@@ -7,7 +8,6 @@ import logger from "./services/logger";
 import * as notificationsService from "./services/notifications";
 import { InMemoryQueue, NotificationMessage } from "./services/queue";
 import { CreateUserRequest, SendNotificationRequest } from "./types";
-import { HttpStatusCode } from "axios";
 
 const app = express();
 
@@ -68,7 +68,9 @@ app.post<{}, {}, SendNotificationRequest>(
         email,
         telephone,
       });
-      res.status(HttpStatusCode.BadRequest).json({ message: "Message is required" });
+      res
+        .status(HttpStatusCode.BadRequest)
+        .json({ message: "Message is required" });
       return;
     }
 
@@ -118,7 +120,9 @@ app.post<{}, {}, SendNotificationRequest>(
       });
     }
 
-    res.status(HttpStatusCode.Accepted).json({ message: "Notifications queued" });
+    res
+      .status(HttpStatusCode.Accepted)
+      .json({ message: "Notifications queued" });
   }
 );
 
@@ -132,14 +136,16 @@ app.post<{}, {}, CreateUserRequest>("/api/users", (req, res) => {
       email: req.body.email,
       error: error instanceof Error ? error.message : String(error),
     });
-    res.status(HttpStatusCode.BadRequest).json({ message: (error as Error).message });
+    res
+      .status(HttpStatusCode.BadRequest)
+      .json({ message: (error as Error).message });
   }
 });
 
 app.put("/api/users", (req, res) => {
   try {
     const user = db.users.upsert(req.body);
-    
+
     logger.info("User preferences updated", { userId: user.userId });
     res.status(HttpStatusCode.Ok).json(user);
   } catch (error) {
@@ -147,7 +153,9 @@ app.put("/api/users", (req, res) => {
       email: req.body.email,
       error: error instanceof Error ? error.message : String(error),
     });
-    res.status(HttpStatusCode.BadRequest).json({ message: (error as Error).message });
+    res
+      .status(HttpStatusCode.BadRequest)
+      .json({ message: (error as Error).message });
   }
 });
 

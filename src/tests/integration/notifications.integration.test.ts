@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "axios";
 import { api, generateTestUser } from "./setup";
 
 describe("Successful Notification Scenarios", () => {
@@ -10,8 +11,8 @@ describe("Successful Notification Scenarios", () => {
       message: "Test notification to both channels",
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data.message).toBe("Notifications sent");
+    expect(response.status).toBe(HttpStatusCode.Accepted);
+    expect(response.data.message).toBe("Notifications queued");
   });
 
   it("should send notification only via email when SMS disabled", async () => {
@@ -24,8 +25,8 @@ describe("Successful Notification Scenarios", () => {
       message: "Test email-only notification",
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data.message).toBe("Notifications sent");
+    expect(response.status).toBe(HttpStatusCode.Accepted);
+    expect(response.data.message).toBe("Notifications queued");
   });
 
   it("should send notification only via SMS when email disabled", async () => {
@@ -38,8 +39,8 @@ describe("Successful Notification Scenarios", () => {
       message: "Test SMS-only notification",
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data.message).toBe("Notifications sent");
+    expect(response.status).toBe(HttpStatusCode.Accepted);
+    expect(response.data.message).toBe("Notifications queued");
   });
 
   it("should find and notify user by email instead of userId", async () => {
@@ -51,7 +52,7 @@ describe("Successful Notification Scenarios", () => {
       message: "Test notification by email search",
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data.message).toBe("Notifications sent");
+    expect(response.status).toBe(HttpStatusCode.Accepted);
+    expect(response.data.message).toBe("Notifications queued");
   });
 });

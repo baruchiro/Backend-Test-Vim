@@ -7,6 +7,9 @@ services:
       - PORT=8080
       - NODE_ENV=production
       - NOTIFICATION_SERVICE_URL=http://notification-service:5001
+      - RATE_LIMIT_WINDOW_MS=1000
+      - EMAIL_RATE_LIMIT=1
+      - SMS_RATE_LIMIT=1
     depends_on:
       - notification-service
 
