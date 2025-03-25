@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "axios";
 import { NextFunction, Request, Response } from "express";
 
 export const authenticate = (
@@ -8,7 +9,7 @@ export const authenticate = (
   const authHeader = req.headers.authorization;
 
   if (authHeader !== "Bearer onlyvim2024") {
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(HttpStatusCode.Unauthorized).json({ error: "Unauthorized" });
     return;
   }
 
