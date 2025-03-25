@@ -8,3 +8,15 @@ export interface NotificationResponse {
 export interface NotificationError {
   error: string;
 }
+
+export interface NotificationPreferences {
+  email: boolean;
+  sms: boolean;
+}
+
+export interface User {
+  userId: number;
+  email?: string;
+  telephone?: string;
+  preferences: NotificationPreferences;
+}

@@ -1,14 +1,4 @@
-export interface NotificationPreferences {
-  email: boolean;
-  sms: boolean;
-}
-
-export interface User {
-  userId: number;
-  email: string;
-  telephone: string;
-  preferences: NotificationPreferences;
-}
+import { User } from "./services/types";
 
 export interface SendNotificationRequest {
   userId?: number;
@@ -16,3 +6,5 @@ export interface SendNotificationRequest {
   telephone?: string;
   message: string;
 }
+
+export interface CreateUserRequest extends Omit<User, "userId"> {}
