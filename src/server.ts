@@ -38,13 +38,11 @@ app.post<{}, {}, SendNotificationRequest>(
 
     // TODO: what if both email and sms are false?
     // TODO: what if one of the notifications fails?
-    if (user.preferences.email) {
-      // TODO: validate preference.email and user.email mutually exclusive
+    if (user.preferences.email && user.email) {
       await notificationsService.sendEmail(user.email, message);
     }
 
-    if (user.preferences.sms) {
-      // TODO: validate preference.sms and user.telephone mutually exclusive
+    if (user.preferences.sms && user.telephone) {
       await notificationsService.sendSms(user.telephone, message);
     }
 
