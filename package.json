@@ -6,7 +6,8 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:integration": "docker compose up --build -d && jest -c jest.integration.config.js; docker compose down"
   },
   "dependencies": {
     "axios": "^1.8.4",
